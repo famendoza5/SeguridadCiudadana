@@ -1,0 +1,46 @@
+.form{
+    width: 294px;
+    height: 369px;
+    background: #ededed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 130px;
+}
+form{
+    flex-direction: column;
+    display: flex;
+    flex-wrap: no-wrap;
+    height: 90%;
+    align-items: center;
+    justify-content:space-around;
+}
+form .logo{
+    width: 35%;
+}
+form input{
+    width: 100%;
+    box-sizing: border-box;
+    height: 25px;
+    border-radius: 3px;
+    color: #80879f;
+    border: 0px;
+    box-shadow: inset 2px 2px 2px 2px rgb(211, 211, 211);
+    height: 35px;
+    padding-left: 7px;
+}
+
+form [type=submit]{
+    box-shadow: none;
+    background: #FFBE73;
+    color: #FFFFFF;
+}
+
+form [placeholder=Correo]{
+  margin-top: 25px;
+}
+
+form .link{
+    width: 100%;
+    color: #80879f;
+}
