@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SeguridadCiudadanaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="barrio">
+          <Key>
+            <PropertyRef Name="id_barrio" />
+          </Key>
+          <Property Name="id_barrio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ciudad" Type="int" Nullable="false" />
+          <Property Name="nombre_barrio" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ciudad">
+          <Key>
+            <PropertyRef Name="id_ciudad" />
+          </Key>
+          <Property Name="id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_departamento" Type="int" Nullable="false" />
+          <Property Name="nombre_ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="departamento">
+          <Key>
+            <PropertyRef Name="id_departamento" />
+          </Key>
+          <Property Name="id_departamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pais" Type="int" Nullable="false" />
+          <Property Name="nombre_departamento" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="evento">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_persona" Type="int" Nullable="false" />
+          <Property Name="fecha_registro" Type="date" Nullable="false" />
+          <Property Name="hora_registro" Type="datetime" Nullable="false" />
+          <Property Name="suceso" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_pais" Type="int" Nullable="false" />
+          <Property Name="id_departamento" Type="int" Nullable="false" />
+          <Property Name="id_ciudad" Type="int" Nullable="false" />
+          <Property Name="id_barrio" Type="int" Nullable="false" />
+          <Property Name="descripcion_evento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_evento" Type="date" Nullable="false" />
+          <Property Name="hora_evento" Type="datetime" Nullable="false" />
+          <Property Name="atencion_policia" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="tipo_lugar" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pais">
+          <Key>
+            <PropertyRef Name="id_pais" />
+          </Key>
+          <Property Name="id_pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_pais" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="id_persona" />
+          </Key>
+          <Property Name="id_persona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="fecha_registro" Type="date" Nullable="false" />
+          <Property Name="hora_registro" Type="datetime" Nullable="false" />
+          <Property Name="primer_nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="segundo_nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="primer_apellido" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="segundo_apellido" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="genero" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="id_pais" Type="int" Nullable="false" />
+          <Property Name="id_departamento" Type="int" Nullable="false" />
+          <Property Name="id_ciudad" Type="int" Nullable="false" />
+          <Property Name="id_barrio" Type="int" Nullable="false" />
+          <Property Name="autorizacion" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sugerencia">
+          <Key>
+            <PropertyRef Name="id_sugerencia" />
+          </Key>
+          <Property Name="id_sugerencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_persona" Type="int" Nullable="false" />
+          <Property Name="fecha_registro" Type="date" Nullable="false" />
+          <Property Name="hora_registro" Type="datetime" Nullable="false" />
+          <Property Name="descripcion" Type="text" />
+        </EntityType>
+        <Association Name="fk_id_ciudad">
+          <End Role="ciudad" Type="Self.ciudad" Multiplicity="1" />
+          <End Role="barrio" Type="Self.barrio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ciudad">
+              <PropertyRef Name="id_ciudad" />
+            </Principal>
+            <Dependent Role="barrio">
+              <PropertyRef Name="id_ciudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_departamento">
+          <End Role="departamento" Type="Self.departamento" Multiplicity="1" />
+          <End Role="ciudad" Type="Self.ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="ciudad">
+              <PropertyRef Name="id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_pais">
+          <End Role="pais" Type="Self.pais" Multiplicity="1" />
+          <End Role="departamento" Type="Self.departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pais">
+              <PropertyRef Name="id_pais" />
+            </Principal>
+            <Dependent Role="departamento">
+              <PropertyRef Name="id_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persona_evento">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="evento">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persona_sugerencia">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="sugerencia" Type="Self.sugerencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="sugerencia">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persona_users">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeguridadCiudadanaModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="barrio" EntityType="Self.barrio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ciudad" EntityType="Self.ciudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="departamento" EntityType="Self.departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="evento" EntityType="Self.evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pais" EntityType="Self.pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sugerencia" EntityType="Self.sugerencia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_id_ciudad" Association="Self.fk_id_ciudad">
+            <End Role="ciudad" EntitySet="ciudad" />
+            <End Role="barrio" EntitySet="barrio" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_departamento" Association="Self.fk_id_departamento">
+            <End Role="departamento" EntitySet="departamento" />
+            <End Role="ciudad" EntitySet="ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_pais" Association="Self.fk_id_pais">
+            <End Role="pais" EntitySet="pais" />
+            <End Role="departamento" EntitySet="departamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persona_evento" Association="Self.fk_persona_evento">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="evento" EntitySet="evento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persona_sugerencia" Association="Self.fk_persona_sugerencia">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="sugerencia" EntitySet="sugerencia" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persona_users" Association="Self.fk_persona_users">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SeguridadCiudadanaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="persona" Relationship="Self.fk_persona_users" FromRole="AspNetUsers" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="barrio">
+          <Key>
+            <PropertyRef Name="id_barrio" />
+          </Key>
+          <Property Name="id_barrio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ciudad" Type="Int32" Nullable="false" />
+          <Property Name="nombre_barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ciudad" Relationship="Self.fk_id_ciudad" FromRole="barrio" ToRole="ciudad" />
+        </EntityType>
+        <EntityType Name="ciudad">
+          <Key>
+            <PropertyRef Name="id_ciudad" />
+          </Key>
+          <Property Name="id_ciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_departamento" Type="Int32" Nullable="false" />
+          <Property Name="nombre_ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="barrio" Relationship="Self.fk_id_ciudad" FromRole="ciudad" ToRole="barrio" />
+          <NavigationProperty Name="departamento" Relationship="Self.fk_id_departamento" FromRole="ciudad" ToRole="departamento" />
+        </EntityType>
+        <EntityType Name="departamento">
+          <Key>
+            <PropertyRef Name="id_departamento" />
+          </Key>
+          <Property Name="id_departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pais" Type="Int32" Nullable="false" />
+          <Property Name="nombre_departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ciudad" Relationship="Self.fk_id_departamento" FromRole="departamento" ToRole="ciudad" />
+          <NavigationProperty Name="pais" Relationship="Self.fk_id_pais" FromRole="departamento" ToRole="pais" />
+        </EntityType>
+        <EntityType Name="evento">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_persona" Type="Int32" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="suceso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_pais" Type="Int32" Nullable="false" />
+          <Property Name="id_departamento" Type="Int32" Nullable="false" />
+          <Property Name="id_ciudad" Type="Int32" Nullable="false" />
+          <Property Name="id_barrio" Type="Int32" Nullable="false" />
+          <Property Name="descripcion_evento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_evento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora_evento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="atencion_policia" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo_lugar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="persona" Relationship="Self.fk_persona_evento" FromRole="evento" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="pais">
+          <Key>
+            <PropertyRef Name="id_pais" />
+          </Key>
+          <Property Name="id_pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="departamento" Relationship="Self.fk_id_pais" FromRole="pais" ToRole="departamento" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="id_persona" />
+          </Key>
+          <Property Name="id_persona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="primer_nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="segundo_nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="primer_apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="segundo_apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genero" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_pais" Type="Int32" Nullable="false" />
+          <Property Name="id_departamento" Type="Int32" Nullable="false" />
+          <Property Name="id_ciudad" Type="Int32" Nullable="false" />
+          <Property Name="id_barrio" Type="Int32" Nullable="false" />
+          <Property Name="autorizacion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.fk_persona_users" FromRole="persona" ToRole="AspNetUsers" />
+          <NavigationProperty Name="evento" Relationship="Self.fk_persona_evento" FromRole="persona" ToRole="evento" />
+          <NavigationProperty Name="sugerencia" Relationship="Self.fk_persona_sugerencia" FromRole="persona" ToRole="sugerencia" />
+        </EntityType>
+        <EntityType Name="sugerencia">
+          <Key>
+            <PropertyRef Name="id_sugerencia" />
+          </Key>
+          <Property Name="id_sugerencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_persona" Type="Int32" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="persona" Relationship="Self.fk_persona_sugerencia" FromRole="sugerencia" ToRole="persona" />
+        </EntityType>
+        <Association Name="fk_persona_users">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_ciudad">
+          <End Role="ciudad" Type="Self.ciudad" Multiplicity="1" />
+          <End Role="barrio" Type="Self.barrio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ciudad">
+              <PropertyRef Name="id_ciudad" />
+            </Principal>
+            <Dependent Role="barrio">
+              <PropertyRef Name="id_ciudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_departamento">
+          <End Role="departamento" Type="Self.departamento" Multiplicity="1" />
+          <End Role="ciudad" Type="Self.ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="ciudad">
+              <PropertyRef Name="id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_pais">
+          <End Role="pais" Type="Self.pais" Multiplicity="1" />
+          <End Role="departamento" Type="Self.departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pais">
+              <PropertyRef Name="id_pais" />
+            </Principal>
+            <Dependent Role="departamento">
+              <PropertyRef Name="id_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persona_evento">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="evento" Type="Self.evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="evento">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persona_sugerencia">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="sugerencia" Type="Self.sugerencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id_persona" />
+            </Principal>
+            <Dependent Role="sugerencia">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeguridadCiudadana" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="barrio" EntityType="Self.barrio" />
+          <EntitySet Name="ciudad" EntityType="Self.ciudad" />
+          <EntitySet Name="departamento" EntityType="Self.departamento" />
+          <EntitySet Name="evento" EntityType="Self.evento" />
+          <EntitySet Name="pais" EntityType="Self.pais" />
+          <EntitySet Name="persona" EntityType="Self.persona" />
+          <EntitySet Name="sugerencia" EntityType="Self.sugerencia" />
+          <AssociationSet Name="fk_persona_users" Association="Self.fk_persona_users">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_ciudad" Association="Self.fk_id_ciudad">
+            <End Role="ciudad" EntitySet="ciudad" />
+            <End Role="barrio" EntitySet="barrio" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_departamento" Association="Self.fk_id_departamento">
+            <End Role="departamento" EntitySet="departamento" />
+            <End Role="ciudad" EntitySet="ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_pais" Association="Self.fk_id_pais">
+            <End Role="pais" EntitySet="pais" />
+            <End Role="departamento" EntitySet="departamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persona_evento" Association="Self.fk_persona_evento">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="evento" EntitySet="evento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persona_sugerencia" Association="Self.fk_persona_sugerencia">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="sugerencia" EntitySet="sugerencia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SeguridadCiudadanaModelStoreContainer" CdmEntityContainer="SeguridadCiudadana">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SeguridadCiudadanaModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="barrio">
+            <EntityTypeMapping TypeName="SeguridadCiudadanaModel.barrio">
+              <MappingFragment StoreEntitySet="barrio">
+                <ScalarProperty Name="id_barrio" ColumnName="id_barrio" />
+                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+                <ScalarProperty Name="nombre_barrio" ColumnName="nombre_barrio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ciudad">
+            <EntityTypeMapping TypeName="SeguridadCiudadanaModel.ciudad">
+              <MappingFragment StoreEntitySet="ciudad">
+                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="nombre_ciudad" ColumnName="nombre_ciudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departamento">
+            <EntityTypeMapping TypeName="SeguridadCiudadanaModel.departamento">
+              <MappingFragment StoreEntitySet="departamento">
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+                <ScalarProperty Name="nombre_departamento" ColumnName="nombre_departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="evento">
+            <EntityTypeMapping TypeName="SeguridadCiudadanaModel.evento">
+              <MappingFragment StoreEntitySet="evento">
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="hora_registro" ColumnName="hora_registro" />
+                <ScalarProperty Name="suceso" ColumnName="suceso" />
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+                <ScalarProperty Name="id_barrio" ColumnName="id_barrio" />
+                <ScalarProperty Name="descripcion_evento" ColumnName="descripcion_evento" />
+                <ScalarProperty Name="fecha_evento" ColumnName="fecha_evento" />
+                <ScalarProperty Name="hora_evento" ColumnName="hora_evento" />
+                <ScalarProperty Name="atencion_policia" ColumnName="atencion_policia" />
+                <ScalarProperty Name="tipo_lugar" ColumnName="tipo_lugar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pais">
+            <EntityTypeMapping TypeName="SeguridadCiudadanaModel.pais">
+              <MappingFragment StoreEntitySet="pais">
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+                <ScalarProperty Name="nombre_pais" ColumnName="nombre_pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="persona">
+            <EntityTypeMapping TypeName="SeguridadCiudadanaModel.persona">
+              <MappingFragment StoreEntitySet="persona">
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="hora_registro" ColumnName="hora_registro" />
+                <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
+                <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
+                <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+                <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+                <ScalarProperty Name="id_barrio" ColumnName="id_barrio" />
+                <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sugerencia">
+            <EntityTypeMapping TypeName="SeguridadCiudadanaModel.sugerencia">
+              <MappingFragment StoreEntitySet="sugerencia">
+                <ScalarProperty Name="id_sugerencia" ColumnName="id_sugerencia" />
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="hora_registro" ColumnName="hora_registro" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

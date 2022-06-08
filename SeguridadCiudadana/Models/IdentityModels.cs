@@ -21,7 +21,7 @@ namespace SeguridadCiudadana.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("SeguridadCiudadanaEntities", throwIfV1Schema: false)
+            : base("SeguridadCiudadana", throwIfV1Schema: false)
         {
         }
 

@@ -13,10 +13,10 @@ namespace Datos
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SeguridadCiudadanaEntities : DbContext
+    public partial class SeguridadCiudadana : DbContext
     {
-        public SeguridadCiudadanaEntities()
-            : base("name=SeguridadCiudadanaEntities")
+        public SeguridadCiudadana()
+            : base("name=SeguridadCiudadana")
         {
         }
     
@@ -25,5 +25,13 @@ namespace Datos
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<barrio> barrio { get; set; }
+        public virtual DbSet<ciudad> ciudad { get; set; }
+        public virtual DbSet<departamento> departamento { get; set; }
+        public virtual DbSet<evento> evento { get; set; }
+        public virtual DbSet<pais> pais { get; set; }
+        public virtual DbSet<persona> persona { get; set; }
+        public virtual DbSet<sugerencia> sugerencia { get; set; }
     }
 }
