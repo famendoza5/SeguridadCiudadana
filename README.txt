@@ -1,0 +1,1 @@
+Emprendimiento en base tecnologica, subgrupo 24
