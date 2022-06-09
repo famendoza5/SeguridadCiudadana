@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SeguridadCiudadana.Models
@@ -79,6 +80,23 @@ namespace SeguridadCiudadana.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        public string id_user { get; set; }
+        public DateTime fecha_registro { get; set; }
+        public DateTime hora_registro { get; set; }
+        public string primer_nombre { get; set; }
+        public string segundo_nombre { get; set; }
+        public string primer_apellido { get; set; }
+        public string segundo_apellido { get; set; }
+        public string correo { get; set; }
+        public string contrasena { get; set; }
+        public string genero { get; set; }
+        public int id_pais { get; set; }
+        public int id_departamento { get; set; }
+        public int id_ciudad { get; set; }
+        public int id_barrio { get; set; }
+        public string autorizacion { get; set; }
+
     }
 
     public class ResetPasswordViewModel
