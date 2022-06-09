@@ -1,6 +1,11 @@
+.survey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .form {
-  width: 294px;
-  height: 369px;
+  width: 100%;
   background: #ededed;
   display: flex;
   align-items: center;
@@ -16,9 +21,9 @@ form {
   justify-content: space-around;
 }
 form .logo {
-  width: 35%;
+  width: 100%;
 }
-form input {
+form .input {
   width: 100%;
   box-sizing: border-box;
   height: 25px;
@@ -28,16 +33,7 @@ form input {
   box-shadow: inset 2px 2px 2px 2px rgb(211, 211, 211);
   height: 35px;
   padding-left: 7px;
-}
-
-form [type="submit"] {
-  box-shadow: none;
-  background: #ffbe73;
-  color: #ffffff;
-}
-
-form [placeholder="Correo"] {
-  margin-top: 25px;
+  margin: 5px;
 }
 
 form .link {
@@ -45,13 +41,12 @@ form .link {
   color: #80879f;
 }
 
-.login-register,
-.search {
-  margin-top: 1vh;
+label {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ededed;
-  height: 84vh;
+}
+
+form [type="submit"] {
+  box-shadow: none;
+  background: #ffbe73;
+  color: #ffffff;
 }

@@ -59,6 +59,7 @@
     <Compile Include="ciudad.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAO\PersonaDAO.cs" />
     <Compile Include="departamento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -16,31 +16,6 @@ form{
     justify-content:space-around;
 }
 form .logo{
-    width: 35%;
-}
-form input{
-    width: 100%;
-    box-sizing: border-box;
-    height: 25px;
-    border-radius: 3px;
-    color: #80879f;
-    border: 0px;
-    box-shadow: inset 2px 2px 2px 2px rgb(211, 211, 211);
-    height: 35px;
-    padding-left: 7px;
-}
-
-form [type=submit]{
-    box-shadow: none;
-    background: #FFBE73;
-    color: #FFFFFF;
-}
-
-form [placeholder=Correo]{
-  margin-top: 25px;
-}
-
-form .link{
-    width: 100%;
-    color: #80879f;
+    width: 25%;
+    margin-bottom: 50px;
 }

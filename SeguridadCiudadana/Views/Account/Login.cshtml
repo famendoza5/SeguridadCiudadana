@@ -3,9 +3,19 @@
 @{
     ViewBag.Title = "Iniciar sesión";
 }
+
 <div class="row">
-    <div class="col bg-gray-600; login-register">
+    <div class="col body login-register">
         <div class="form">
+            <form action="@Url.Action("Login","Account")" class="form-horizontal" method="post" role="form">
+                <input name="__RequestVerificationToken" type="hidden" value="kO8sTEfuUAh-My6oGA81SjFHr6OnXHHnIw6YLOV4b54DMQWXloyjASMp7lKzYjSJfPxtXtOPmjGKlEkub0HpPzS0VGYgNo9oCcTHftdBcOM1" />                <img src="/Content/assets/img/logo.png" class="logo" />
+                <input type="text" class="text-input" placeholder="Correo" name="Email" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>                <input type="password" class="text-input" placeholder="Contraseña" name="Password" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>                <input type="submit" class="button-input" value="Ingresar" />
+                <a href="/Account/Register" class="link">Crear una cuenta</a>
+            </form>
+
+
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
@@ -15,15 +25,14 @@
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 <input type="password" class="text-input" placeholder="Contraseña" name="Password" />
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                <input type="submit" class="button-input" value="Ingresar" />  
-                    @*@Html.ActionLink("Crear una cuenta", "Register")*@
-               
+                <input type="submit" class="button-input" value="Ingresar" />
+                 <a href="@Url.Action("Register")" class="link">Crear una cuenta</a>
 
-            }
+                            }
 
             @*<form action="survey.html" method="get">
-                <a href="index.html" class="link">Crear una cuenta</a>
-            </form>*@
+            <a href="index.html" class="link">Crear una cuenta</a>
+        </form>*@
         </div>
     </div>
 </div>
