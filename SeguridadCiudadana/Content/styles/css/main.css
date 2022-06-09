@@ -8,6 +8,8 @@
   display: flex;
   align-items: center;
   width: 100vw;
+  height: 15vh;
+  background: #142357;
 }
 
 .logo {
@@ -22,19 +24,23 @@
 
 .nav {
   height: 100%;
+  display: flex;
+  justify-content: right;
+  width: 600px;
 }
 
 .link {
   color: white;
   align-self: flex-end;
+  margin-right: 5px;
 }
 
-.login-register, .search{
-  margin-top: 1vh;
+.body {
   width: 100%;
+  margin-top: 2vh;
+  min-height: 83vh;
+  background: #ededed;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ededed;
-  height: 84vh;
 }

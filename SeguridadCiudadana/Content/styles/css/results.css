@@ -1,0 +1,36 @@
+.body {
+  display: block;
+}
+.ext-dash{
+    width: 100%;
+    min-height: 70vh;
+    background: rgb(255, 255, 255);
+    border-radius: 3px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.result{
+    width: 24%;
+    height: 60px;
+    background-color: #73adff;
+    border: solid 3px black;
+    border-radius: 3px;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight:bolder;
+    text-decoration: none;
+}
+
+.result:hover{
+    color: yellow;
+    width: 24.1%;
+    height: 59px;
+}
